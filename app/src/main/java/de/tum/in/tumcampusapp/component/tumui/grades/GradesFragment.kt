@@ -27,6 +27,7 @@ import de.tum.`in`.tumcampusapp.component.other.generic.fragment.FragmentForAcce
 import de.tum.`in`.tumcampusapp.component.tumui.grades.model.Exam
 import de.tum.`in`.tumcampusapp.component.tumui.grades.model.ExamList
 import de.tum.`in`.tumcampusapp.databinding.FragmentGradesBinding
+import de.tum.`in`.tumcampusapp.databinding.LayoutAllErrorsBinding
 import de.tum.`in`.tumcampusapp.utils.Const
 import de.tum.`in`.tumcampusapp.utils.Utils
 import org.jetbrains.anko.support.v4.defaultSharedPreferences
@@ -55,6 +56,9 @@ class GradesFragment : FragmentForAccessingTumOnline<ExamList>(
     }
 
     private val binding by viewBinding(FragmentGradesBinding::bind)
+
+    override val swipeRefreshLayout get() = binding.swipeRefreshLayout
+    override val layoutAllErrorsBinding get() = binding.layoutAllErrors
 
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
