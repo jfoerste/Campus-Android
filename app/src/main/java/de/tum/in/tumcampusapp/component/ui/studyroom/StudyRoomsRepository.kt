@@ -1,23 +1,34 @@
 package de.tum.`in`.tumcampusapp.component.ui.studyroom
 
-import android.content.Context
+import androidx.lifecycle.MutableLiveData
+import de.tum.`in`.tumcampusapp.component.ui.studyroom.StudyRoomDao
+import de.tum.`in`.tumcampusapp.component.ui.studyroom.StudyRoomGroupDao
 import de.tum.`in`.tumcampusapp.component.ui.studyroom.model.StudyRoom
 import de.tum.`in`.tumcampusapp.component.ui.studyroom.model.StudyRoomGroup
 import de.tum.`in`.tumcampusapp.database.TcaDb
 import org.jetbrains.anko.doAsync
 
-/**
- * Handles content for the study room feature, fetches external data.
- */
-class StudyRoomGroupManager(context: Context) {
+class StudyRoomsRepository (db: TcaDb) {
+    private val roomsDao: StudyRoomDao = db.studyRoomDao()
+    private val groupsDao: StudyRoomGroupDao = db.studyRoomGroupDao()
 
-    private val roomsDao: StudyRoomDao
-    private val groupsDao: StudyRoomGroupDao
+    val groups = MutableLiveData<List<StudyRoomGroup>>()
+    val currentRoomGroup = MutableLiveData<StudyRoomGroup>()
 
     init {
-        val db = TcaDb.getInstance(context)
-        roomsDao = db.studyRoomDao()
-        groupsDao = db.studyRoomGroupDao()
+        val allRoomGroups = groupsDao.all.sorted()
+        groups.value = allRoomGroups
+        if (allRoomGroups.isNotEmpty()) {
+            val group = allRoomGroups[0]
+            group.rooms = roomsDao.getAll(group.id).sorted()
+            currentRoomGroup.value = group
+        }
+    }
+
+    fun selectCurrent(id: Int) {
+        val group = groupsDao.get(id)
+        group.rooms = roomsDao.getAll(group.id).sorted()
+        currentRoomGroup.value = group
     }
 
     fun updateDatabase(groups: List<StudyRoomGroup>, callback: () -> Unit) {
@@ -49,5 +60,10 @@ class StudyRoomGroupManager(context: Context) {
 
     fun getAllStudyGroups(): List<StudyRoomGroup> {
         return groupsDao.all.sorted() // TODO
+    }
+
+    fun refresh() {
+        // TODO
+        Thread.sleep(1000)
     }
 }

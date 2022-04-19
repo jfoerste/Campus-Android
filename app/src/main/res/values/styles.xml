@@ -224,4 +224,8 @@
         <item name="android:backgroundTint">@color/default_button_background</item>
         <item name="iconTint">@color/text_primary</item>
     </style>
+
+    <style name="TextInputLayout" parent="Widget.MaterialComponents.TextInputLayout.OutlinedBox.ExposedDropdownMenu">
+        <item name="boxStrokeColor">@color/text_input_box_stroke_strong</item>
+    </style>
 </resources>

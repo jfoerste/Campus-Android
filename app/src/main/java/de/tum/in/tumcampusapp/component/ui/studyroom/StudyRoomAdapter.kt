@@ -14,7 +14,7 @@ import de.tum.`in`.tumcampusapp.utils.Utils
 import org.joda.time.format.DateTimeFormat
 import java.util.*
 
-class StudyRoomAdapter(private val fragment: Fragment, private val studyRooms: List<StudyRoom>) :
+class StudyRoomAdapter(private val fragment: Fragment, var studyRooms: List<StudyRoom>) :
         RecyclerView.Adapter<StudyRoomViewHolder>() {
 
     override fun onCreateViewHolder(parent: ViewGroup, viewType: Int): StudyRoomViewHolder {

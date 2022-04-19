@@ -9,6 +9,8 @@
     <color name="placeholder">@color/tum_light_gray</color>
 
     <color name="spinner_border">#8AFFFFFF</color>
+    <color name="spinner_border_strong">@color/white</color>
+
 
     <!-- Default colors -->
 

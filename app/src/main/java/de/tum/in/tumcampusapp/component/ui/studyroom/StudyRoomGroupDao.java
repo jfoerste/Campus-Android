@@ -15,6 +15,9 @@ public interface StudyRoomGroupDao {
     @Query("SELECT * FROM study_room_groups")
     List<StudyRoomGroup> getAll();
 
+    @Query("SELECT * FROM study_room_groups WHERE id == :id")
+    StudyRoomGroup get(int id);
+
     @Query("DELETE FROM study_room_groups")
     void removeCache();
 

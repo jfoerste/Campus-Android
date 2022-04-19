@@ -35,6 +35,7 @@
 
     <color name="spinner_background">@color/default_window_background</color>
     <color name="spinner_border">@color/tum_dark_gray</color>
+    <color name="spinner_border_strong">@color/black</color>
 
     <color name="input_layout_border">@color/color_primary</color>
 
